@@ -4,7 +4,53 @@ use std::io::{BufRead, BufReader};
 
 
 fn interpret(command: char) {
-    println!("Char: {}", command);
+    match command {
+        '+' => {
+            println!("We are incrementing the current cell value.");
+        },
+        '-' => {
+            println!("We are decrementing the current cell value.");
+        },
+        '>' => {
+            println!("We are increasing the pointer along the X axis.");
+        },
+        '<' => {
+            println!("We are decreasing the pointer along the X axis.");
+        },
+        '^' => {
+            println!("We are increasing the pointer along the Y axis.");
+        },
+        'v' | 'V' => {
+            println!("We are decreasing the pointer along the Y axis.");
+        },
+        '*' => {
+            println!("We are increasing the pointer along the Z axis.");
+        },
+        'o' | 'O' => {
+            println!("We are decreasing the pointer along the Z axis.");
+        },
+        '@' => {
+            println!("We are increasing the pointer along the W axis.");
+        },
+        '?' => {
+            println!("We are decreasing the pointer along the W axis.");
+        },
+        '.' => {
+            println!("We are outputting current cell value here.");
+        },
+        ',' => {
+            println!("We are inputting a character here.");
+        },
+        '[' => {
+            println!("Jump to matching brace if pointer is zero.");
+        },
+        ']' => {
+            println!("Jump to matching brace if pointer is nonzero");
+        },
+        _ => {
+            println!("How did you get here?");
+        }
+    }
 }
 
 fn main() {
