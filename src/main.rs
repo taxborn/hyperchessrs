@@ -2,6 +2,43 @@ use std::env;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 
+#[derive(Debug)]
+#[derive(Clone)]
+enum OpCode {
+    IncrementX,
+    DecrementX,
+    IncrementY,
+    DecrementY,
+    IncrementZ,
+    DecrementZ,
+    IncrementW,
+    DecrementW,
+    Increment,
+    Decrement,
+    Write,
+    Read,
+    LoopBegin,
+    LoopEnd,
+}
+
+
+#[derive(Debug)]
+#[derive(Clone)]
+enum Instruction {
+    IncrementX,
+    DecrementX,
+    IncrementY,
+    DecrementY,
+    IncrementZ,
+    DecrementZ,
+    IncrementW,
+    DecrementW,
+    Increment,
+    Decrement,
+    Write,
+    Read,
+    Loop(Vec<Instruction>),
+}
 
 fn interpret(command: char) {
     match command {
