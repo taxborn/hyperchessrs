@@ -1,6 +1,6 @@
 use std::env;
+use std::io::Read;
 use std::fs::File;
-use std::io::{BufRead, BufReader};
 
 #[derive(Debug)]
 #[derive(Clone)]
@@ -87,6 +87,10 @@ fn parser(opcodes: Vec<OpCode>) -> Vec<Instruction> {
                 OpCode::DecrementZ => Some(Instruction::DecrementZ),
                 OpCode::IncrementW => Some(Instruction::IncrementW),
                 OpCode::DecrementW => Some(Instruction::DecrementW),
+                OpCode::Increment  => Some(Instruction::Increment),
+                OpCode::Decrement  => Some(Instruction::Decrement),
+                OpCode::Read       => Some(Instruction::Read),
+                OpCode::Write      => Some(Instruction::Write),
 
                 OpCode::LoopBegin => {
                     loop_start = i;
@@ -129,20 +133,18 @@ fn parser(opcodes: Vec<OpCode>) -> Vec<Instruction> {
 fn main() {
     let args: Vec<String> = env::args().collect();
 
-    match args.len() {
-        2 => {
-            let filename = &args[1];
-
-            let f = BufReader::new(File::open(filename).expect("Open failed"));
-
-            for line in f.lines() {
-                for c in line.expect("lines failed").chars() {
-                    interpret(c);
-                }
-            }
-        },
-        _ => {
-            println!("Please specify ONE file to compile.");
-        }
+    if args.len() != 2 {
+        panic!("usage: hyperchessrs <name.4dc>");
     }
+
+    let filename = &args[1];
+
+    let mut file = File::open(filename).expect("Open failed.");
+    let mut source = String::new();
+
+    file.read_to_string(&mut source).expect("Failed to read to string.");
+
+    let opcodes = lexer(source);
+
+    let program = parser(opcodes);
 }
