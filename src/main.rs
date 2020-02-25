@@ -40,58 +40,38 @@ enum Instruction {
     Loop(Vec<Instruction>),
 }
 
-fn interpret(command: char) {
-    match command {
-        '+' => {
-            println!("We are incrementing the current cell value.");
-        },
-        '-' => {
-            println!("We are decrementing the current cell value.");
-        },
-        '>' => {
-            println!("We are increasing the pointer along the X axis.");
-        },
-        '<' => {
-            println!("We are decreasing the pointer along the X axis.");
-        },
-        '^' => {
-            println!("We are increasing the pointer along the Y axis.");
-        },
-        'v' | 'V' => {
-            println!("We are decreasing the pointer along the Y axis.");
-        },
-        '*' => {
-            println!("We are increasing the pointer along the Z axis.");
-        },
-        'o' | 'O' => {
-            println!("We are decreasing the pointer along the Z axis.");
-        },
-        '@' => {
-            println!("We are increasing the pointer along the W axis.");
-        },
-        '?' => {
-            println!("We are decreasing the pointer along the W axis.");
-        },
-        '.' => {
-            println!("We are outputting current cell value here.");
-        },
-        ',' => {
-            println!("We are inputting a character here.");
-        },
-        '[' => {
-            println!("Jump to matching brace if pointer is zero.");
-        },
-        ']' => {
-            println!("Jump to matching brace if pointer is nonzero");
-        },
-        _ => {
-            println!("How did you get here?");
+fn lexer (source: String) -> Vec<OpCode> {
+    let mut operations = Vec::new();
+
+    for symbol in source.chars() {
+        let op = match symbol {
+            '+'       => Some(OpCode::Increment),
+            '-'       => Some(OpCode::Decrement),
+            '>'       => Some(OpCode::IncrementX),
+            '<'       => Some(OpCode::DecrementX),
+            '^'       => Some(OpCode::IncrementY),
+            'v' | 'V' => Some(OpCode::DecrementY),
+            '*'       => Some(OpCode::IncrementZ),
+            'o' | 'O' => Some(OpCode::DecrementZ),
+            '@'       => Some(OpCode::IncrementW),
+            '?'       => Some(OpCode::DecrementW),
+            '.'       => Some(OpCode::Write),
+            ','       => Some(OpCode::Read),
+            '['       => Some(OpCode::LoopBegin),
+            ']'       => Some(OpCode::LoopEnd),
+            _         => None,
+        };
+
+        match op {
+            Some(op) => operations.push(op),
+            None     => (),
         }
     }
+
+    operations
 }
 
 fn main() {
-    let valid_characters = ['<', '>', '^', 'v', 'V', '*', 'o', 'O', '?', '@', '+', '-', '.', ',', '[', ']'];
     let args: Vec<String> = env::args().collect();
 
     match args.len() {
@@ -102,9 +82,7 @@ fn main() {
 
             for line in f.lines() {
                 for c in line.expect("lines failed").chars() {
-                    if valid_characters.contains(&c) {
-                        interpret(c);
-                    }
+                    interpret(c);
                 }
             }
         },
