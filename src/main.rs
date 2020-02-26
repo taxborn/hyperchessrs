@@ -145,14 +145,11 @@ fn run(instructions: &Vec<Instruction>, tape: &mut Vec<Vec<Vec<Vec<u8>>>>, point
             Instruction::DecrementW => *pointer_w -= 1,
             Instruction::Increment  => tape[*pointer_x][*pointer_y][*pointer_z][*pointer_w] += 1,
             Instruction::Decrement  => tape[*pointer_x][*pointer_y][*pointer_z][*pointer_w] -= 1,
-            Instruction::Write => (),
+            Instruction::Write => print!("{}", tape[*pointer_x][*pointer_y][*pointer_z][*pointer_w] as char),
             Instruction::Read => (),
             Instruction::Loop(_) => (),
         }
     }
-
-
-    // println!("X: {}, Y: {}, Z: {}, W: {}", pointer_x, pointer_y, pointer_z, pointer_w);
 }
 
 fn main() {
@@ -171,10 +168,9 @@ fn main() {
 
     let opcodes = lexer(source);
     let program = parser(opcodes);
-    let mut tape: Vec<Vec<Vec<Vec<u8>>>> = vec![vec![vec![vec![0u8, 2]; 2]; 2]; 2];
+    let mut tape: Vec<Vec<Vec<Vec<u8>>>> = vec![vec![vec![vec![0u8, 8]; 8]; 8]; 8];
 
-    tape[0][0][0][0] = 3; 
-    println!("{:#?}", tape);
+    run(&program, &mut tape, &mut 0, &mut 0, &mut 0, &mut 0);
 
-    // run(&program, &mut tape, &mut 0, &mut 0, &mut 0, &mut 0);
+    // println!("{:#?}", tape);
 }
