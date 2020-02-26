@@ -130,6 +130,31 @@ fn parser(opcodes: Vec<OpCode>) -> Vec<Instruction> {
     program
 }
 
+fn run(instructions: &Vec<Instruction>, tape: &mut Vec<Vec<Vec<Vec<u8>>>>, pointer_x: &mut usize, pointer_y: &mut usize, pointer_z: &mut usize, pointer_w: &mut usize) {
+    for instruct in instructions {
+        match instruct {
+            Instruction::IncrementX => {
+                *pointer_x += 1;
+            },
+            Instruction::DecrementX => *pointer_x -= 1,
+            Instruction::IncrementY => *pointer_y += 1,
+            Instruction::DecrementY => *pointer_y -= 1,
+            Instruction::IncrementZ => *pointer_z += 1,
+            Instruction::DecrementZ => *pointer_z -= 1,
+            Instruction::IncrementW => *pointer_w += 1,
+            Instruction::DecrementW => *pointer_w -= 1,
+            Instruction::Increment  => tape[*pointer_x][*pointer_y][*pointer_z][*pointer_w] += 1,
+            Instruction::Decrement  => tape[*pointer_x][*pointer_y][*pointer_z][*pointer_w] -= 1,
+            Instruction::Write => (),
+            Instruction::Read => (),
+            Instruction::Loop(_) => (),
+        }
+    }
+
+
+    // println!("X: {}, Y: {}, Z: {}, W: {}", pointer_x, pointer_y, pointer_z, pointer_w);
+}
+
 fn main() {
     let args: Vec<String> = env::args().collect();
 
@@ -145,6 +170,11 @@ fn main() {
     file.read_to_string(&mut source).expect("Failed to read to string.");
 
     let opcodes = lexer(source);
-
     let program = parser(opcodes);
+    let mut tape: Vec<Vec<Vec<Vec<u8>>>> = vec![vec![vec![vec![0u8, 2]; 2]; 2]; 2];
+
+    tape[0][0][0][0] = 3; 
+    println!("{:#?}", tape);
+
+    // run(&program, &mut tape, &mut 0, &mut 0, &mut 0, &mut 0);
 }
