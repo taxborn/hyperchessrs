@@ -45,21 +45,21 @@ fn lexer (source: String) -> Vec<OpCode> {
 
     for symbol in source.chars() {
         let op = match symbol {
-            '+'       => Some(OpCode::Increment),
-            '-'       => Some(OpCode::Decrement),
-            '>'       => Some(OpCode::IncrementX),
-            '<'       => Some(OpCode::DecrementX),
-            '^'       => Some(OpCode::IncrementY),
-            'v' | 'V' => Some(OpCode::DecrementY),
-            '*'       => Some(OpCode::IncrementZ),
-            'o' | 'O' => Some(OpCode::DecrementZ),
-            '@'       => Some(OpCode::IncrementW),
-            '?'       => Some(OpCode::DecrementW),
-            '.'       => Some(OpCode::Write),
-            ','       => Some(OpCode::Read),
-            '['       => Some(OpCode::LoopBegin),
-            ']'       => Some(OpCode::LoopEnd),
-            _         => None,
+            '+' => Some(OpCode::Increment),
+            '-' => Some(OpCode::Decrement),
+            '>' => Some(OpCode::IncrementX),
+            '<' => Some(OpCode::DecrementX),
+            '^' => Some(OpCode::IncrementY),
+            'v' => Some(OpCode::DecrementY),
+            '*' => Some(OpCode::IncrementZ),
+            'o' => Some(OpCode::DecrementZ),
+            '@' => Some(OpCode::IncrementW),
+            '?' => Some(OpCode::DecrementW),
+            '.' => Some(OpCode::Write),
+            ',' => Some(OpCode::Read),
+            '[' => Some(OpCode::LoopBegin),
+            ']' => Some(OpCode::LoopEnd),
+            _   => None,
         };
 
         match op {
@@ -146,8 +146,18 @@ fn run(instructions: &Vec<Instruction>, tape: &mut Vec<Vec<Vec<Vec<u8>>>>, point
             Instruction::Increment  => tape[*pointer_x][*pointer_y][*pointer_z][*pointer_w] += 1,
             Instruction::Decrement  => tape[*pointer_x][*pointer_y][*pointer_z][*pointer_w] -= 1,
             Instruction::Write => print!("{}", tape[*pointer_x][*pointer_y][*pointer_z][*pointer_w] as char),
-            Instruction::Read => (),
-            Instruction::Loop(_) => (),
+            Instruction::Read => {
+                let mut input: [u8; 1] = [0; 1];
+
+                std::io::stdin().read_exact(&mut input).expect("Failed to read data.");
+
+                tape[*pointer_x][*pointer_y][*pointer_z][*pointer_w] = input[0];
+            },
+            Instruction::Loop(instructions) => {
+                while tape[*pointer_x][*pointer_y][*pointer_z][*pointer_w] != 0 {
+                    run(&instructions, tape, &mut 0, &mut 0, &mut 0, &mut 0);
+                }
+            },
         }
     }
 }
