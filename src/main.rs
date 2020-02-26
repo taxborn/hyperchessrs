@@ -21,7 +21,6 @@ enum OpCode {
     LoopEnd,
 }
 
-
 #[derive(Debug)]
 #[derive(Clone)]
 enum Instruction {
@@ -133,9 +132,7 @@ fn parser(opcodes: Vec<OpCode>) -> Vec<Instruction> {
 fn run(instructions: &Vec<Instruction>, tape: &mut Vec<Vec<Vec<Vec<u8>>>>, pointer_x: &mut usize, pointer_y: &mut usize, pointer_z: &mut usize, pointer_w: &mut usize) {
     for instruct in instructions {
         match instruct {
-            Instruction::IncrementX => {
-                *pointer_x += 1;
-            },
+            Instruction::IncrementX => *pointer_x += 1,
             Instruction::DecrementX => *pointer_x -= 1,
             Instruction::IncrementY => *pointer_y += 1,
             Instruction::DecrementY => *pointer_y -= 1,
@@ -181,6 +178,4 @@ fn main() {
     let mut tape: Vec<Vec<Vec<Vec<u8>>>> = vec![vec![vec![vec![0u8, 8]; 8]; 8]; 8];
 
     run(&program, &mut tape, &mut 0, &mut 0, &mut 0, &mut 0);
-
-    // println!("{:#?}", tape);
 }
