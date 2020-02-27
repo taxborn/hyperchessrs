@@ -33,3 +33,6 @@ Now that the binary has been compiled, you can access it by running:
 - [ ] Add to the [esolangs](https://esolangs.org/wiki/4DChess) page
 
 ## References used:
+- [Interpreter Wiki](https://en.wikipedia.org/wiki/Interpreter_(computing))
+- [4DChess esolangs page](https://esolangs.org/wiki/4DChess)
+- 
