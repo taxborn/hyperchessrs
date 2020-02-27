@@ -25,9 +25,11 @@ fn main() {
 
     file.read_to_string(&mut source).expect("Failed to read to string.");
 
+    let length: usize = 8;
+
     let opcodes = lex(source);
     let program = parse(opcodes);
-    let mut tape: Vec<Vec<Vec<Vec<u8>>>> = vec![vec![vec![vec![0u8; 8]; 8]; 8]; 8];
+    let mut tape: Vec<Vec<Vec<Vec<u8>>>> = vec![vec![vec![vec![0u8; length]; length]; length]; length];
     
     let mut pointers: [u8; 4] = [0; 4]; 
     run(&program, &mut tape, &mut pointers);
