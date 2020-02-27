@@ -31,6 +31,6 @@ fn main() {
     let program = parse(opcodes);
     let mut tape: Vec<Vec<Vec<Vec<u8>>>> = vec![vec![vec![vec![0u8; length]; length]; length]; length];
     
-    let mut pointers: [u8; 4] = [0; 4]; 
+    let mut pointers: [usize; 4] = [0; 4]; 
     run(&program, &mut tape, &mut pointers);
 }
