@@ -28,10 +28,7 @@ fn main() {
     let opcodes = lex(source);
     let program = parse(opcodes);
     let mut tape: Vec<Vec<Vec<Vec<u8>>>> = vec![vec![vec![vec![0u8; 8]; 8]; 8]; 8];
-
-    // println!("{:#?}", tape);
-
-    // let mut pointers: Vec<u8> = vec![0u8; 4];
-
-    run(&program, &mut tape, &mut 0, &mut 0, &mut 0, &mut 0);
+    
+    let mut pointers: [u8; 4] = [0; 4]; 
+    run(&program, &mut tape, &mut pointers);
 }
