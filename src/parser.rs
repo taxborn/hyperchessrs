@@ -35,7 +35,7 @@ pub fn parse(opcodes: Vec<OpCode>) -> Vec<Instruction> {
             match instruct {
                 Some(instruct) => program.push(instruct),
                 None => (),
-            }
+            };
         } else {
             match op {
                 OpCode::LoopBegin => loop_stack += 1,
@@ -49,7 +49,7 @@ pub fn parse(opcodes: Vec<OpCode>) -> Vec<Instruction> {
                 },
 
                 _ => (),
-            }
+            };
         }
     }
 

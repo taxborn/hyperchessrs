@@ -25,7 +25,7 @@ pub fn lex(source: String) -> Vec<OpCode> {
         match op {
             Some(op) => operations.push(op),
             None     => (),
-        }
+        };
     }
 
     operations
