@@ -29,10 +29,15 @@ $ ./target/debug/hyperchessrs <name of 4D Chess file>.4dc # If --release was use
 ```
 
 ## What I want to add in the future:
-- [ ] Optimize it
+- [ ] Optimize it ([Optmization blog](https://www.nayuki.io/page/optimizing-brainfuck-compiler))
 - [ ] Add more sample programs
 - [ ] Clean up the runner file
 - [ ] Add to the [esolangs](https://esolangs.org/wiki/4DChess) page
+- [ ] Add debug options (--debug?)
+  - [ ] Add command line argument parsing
+  - [ ] Ability to show memory cells
+  - [ ] Print out OpCode & Instruction Vector
+  - [ ] Step through program?
 
 ## References used:
 - [Interpreter Wiki](https://en.wikipedia.org/wiki/Interpreter_(computing))
