@@ -19,12 +19,12 @@ pub fn lex(source: String) -> Vec<OpCode> {
             ',' => Some(OpCode::Read),
             '[' => Some(OpCode::LoopBegin),
             ']' => Some(OpCode::LoopEnd),
-            _   => None,
+            _ => None,
         };
 
         match op {
             Some(op) => operations.push(op),
-            None     => (),
+            None => (),
         };
     }
 

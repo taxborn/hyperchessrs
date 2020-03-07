@@ -1,11 +1,11 @@
+mod instructions;
 mod lexer;
 mod parser;
 mod runner;
-mod instructions;
 
 use std::env;
-use std::io::Read;
 use std::fs::File;
+use std::io::Read;
 
 use crate::lexer::lex;
 use crate::parser::parse;
@@ -23,14 +23,16 @@ fn main() {
     let mut file = File::open(filename).expect("Open failed.");
     let mut source = String::new();
 
-    file.read_to_string(&mut source).expect("Failed to read to string.");
+    file.read_to_string(&mut source)
+        .expect("Failed to read to string.");
 
     let length: usize = 8;
 
     let opcodes = lex(source);
     let program = parse(opcodes);
-    let mut tape: Vec<Vec<Vec<Vec<u8>>>> = vec![vec![vec![vec![0u8; length]; length]; length]; length];
-    
-    let mut pointers: [usize; 4] = [0; 4]; 
+    let mut tape: Vec<Vec<Vec<Vec<u8>>>> =
+        vec![vec![vec![vec![0u8; length]; length]; length]; length];
+
+    let mut pointers: [usize; 4] = [0; 4];
     run(&program, &mut tape, &mut pointers);
 }

@@ -1,5 +1,4 @@
-#[derive(Debug)]
-#[derive(Clone)]
+#[derive(Debug, Clone)]
 pub enum OpCode {
     IncrementX,
     DecrementX,
@@ -17,8 +16,7 @@ pub enum OpCode {
     LoopEnd,
 }
 
-#[derive(Debug)]
-#[derive(Clone)]
+#[derive(Debug, Clone)]
 pub enum Instruction {
     IncrementX,
     DecrementX,
