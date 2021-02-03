@@ -2,7 +2,7 @@
 
 As described from it's esolangs wiki page:
 
-> 4DChess is an esoteric programming language designed by User: Zemeckis on 18th November, 2019. It is directly inspired from Brainf\*\*\*. Instead of brain\*\*\*'s usual one-dimensional memory cell array, 4DChess uses a four-dimensional hypercube-like memory cell array of 8 cells per dimension. 
+> 4DChess is an esoteric programming language designed by User: Zemeckis on 18th November, 2019. It is directly inspired from Brainfuck. Instead of brainfuck's usual one-dimensional memory cell array, 4DChess uses a four-dimensional hypercube-like memory cell array of 8 cells per dimension. 
 
 ## What I wanted to do
 Here is what I wanted to achieve:
