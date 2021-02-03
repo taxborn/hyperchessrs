@@ -42,5 +42,5 @@ $ ./target/debug/hyperchessrs <name of 4D Chess file>.4dc # If --release was use
 ## References used:
 - [Interpreter Wiki](https://en.wikipedia.org/wiki/Interpreter_(computing))
 - [4DChess esolangs page](https://esolangs.org/wiki/4DChess)
-- [Brainf*** interpreter in Rust](https://dev.to/shritesh/writing-a-brainfuck-interpreter-in-rust-and-webassembly-13f)
+- [Brainfuck interpreter in Rust](https://dev.to/shritesh/writing-a-brainfuck-interpreter-in-rust-and-webassembly-13f)
 - [Another interpeter example](https://docs.rs/brainfuck/0.2.0/brainfuck/)
