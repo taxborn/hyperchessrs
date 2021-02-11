@@ -12,6 +12,9 @@ Here is what I wanted to achieve:
 - [X] Create an interpreter for an esoteric language
 - [X] Create sample programs in esoteric languages
 
+## My explination
+I [created a YouTube](https://youtu.be/CKC-ITrp0yU) video explaining my thought process.
+
 ## How to compile and run:
 
 **Note:** You need to have [Rust installed](https://rustup.rs) on your system to build. I will include released binaries later.
